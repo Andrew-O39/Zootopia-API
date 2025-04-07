@@ -1,7 +1,4 @@
-import json
-
-from load_data import load_data # import function to load JSON dataf
-
+from api_data import fetch_animal_data
 
 def serialize_animal(animal_obj):
     output = '' # Start with an empty string
@@ -28,31 +25,17 @@ def serialize_animal(animal_obj):
 
 
 def main():
-    try:
-        # Load JSON file
-        animals_data = load_data("animals_data.json")
-    except FileNotFoundError:
-        print("Error: 'animals_data.json' file not found.")
-        return
-    except json.JSONDecodeError:
-        print("Error: Failed to parse 'animals_data.json'. Is 'animals_data.json' a valid JSON file?")
-        return
-    except Exception as e:
-        print(f"Unexpected error while loading data: {e}")
+    animal_name = "Fox"
+    animals_data = fetch_animal_data(animal_name)
+
+    if not animals_data:
+        print("No valid animal data to display.")
         return
 
-    if not animals_data or not isinstance(animals_data, list):
-        print("Error: No valid animal data found in 'animals_data.json'.")
-        return
-
-    # Generate HTML for all animals
-    output_lines = []
-    for animal in animals_data:
-        output_lines.append(serialize_animal(animal)) # Append each animal's HTML
+    output_lines = [serialize_animal(animal) for animal in animals_data]
     output = ''.join(output_lines)
 
     try:
-        # Read "animals_template.html" file
         with open("animals_template.html", "r") as template_file:
             template_content = template_file.read()
     except FileNotFoundError:
