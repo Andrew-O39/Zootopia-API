@@ -25,26 +25,26 @@ def serialize_animal(animal_obj):
 
 
 def main():
-    name = input("Enter the name of an animal: ").strip()
-
-    animals_data = fetch_animal_data(name)
-
-    if not animals_data:
-        print("No valid animal data to display.")
-        return
-
-    output_lines = [serialize_animal(animal) for animal in animals_data]
-    output = ''.join(output_lines)
-
+    name = input("Enter a name of an animal: ").strip()
     try:
         with open("animals_template.html", "r") as template_file:
             template_content = template_file.read()
     except FileNotFoundError:
-        print("Error: 'animals_template.html' file not found.")
+        print("Template file not found.")
         return
-    except Exception as e:
-        print(f"Unexpected error while reading template: {e}")
-        return
+
+    if not name:
+        print("No animal name entered.")
+        output = "<h2>No animal name entered.</h2>"
+
+    else:
+        animals_data = fetch_animal_data(name)
+
+        if not animals_data:
+            output = f'<h2>The animal "{name}" does not exist. Would you like to try a different animal?</h2>'
+        else:
+            output_lines = [serialize_animal(animal) for animal in animals_data]
+            output = ''.join(output_lines)
 
     # Replace placeholder with generated animal information
     if "__REPLACE_ANIMALS_INFO__" not in template_content:
