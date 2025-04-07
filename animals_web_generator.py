@@ -1,6 +1,7 @@
 import json
 
-from load_data import load_data # import function to load JSON data
+from load_data import load_data # import function to load JSON dataf
+
 
 def serialize_animal(animal_obj):
     output = '' # Start with an empty string
