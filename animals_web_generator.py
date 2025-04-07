@@ -25,8 +25,9 @@ def serialize_animal(animal_obj):
 
 
 def main():
-    animal_name = "Fox"
-    animals_data = fetch_animal_data(animal_name)
+    name = input("Enter the name of an animal: ").strip()
+
+    animals_data = fetch_animal_data(name)
 
     if not animals_data:
         print("No valid animal data to display.")
