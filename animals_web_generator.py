@@ -2,6 +2,13 @@ import data_fetcher
 
 
 def serialize_animal(animal_obj):
+    """Converts an animal dictionary into an HTML <li> element for display on the website.
+    Parameters:
+        animal_obj (dict): A dictionary containing information about a single animal.
+                           Expected keys include 'name', 'characteristics', and 'locations'.
+    Returns:
+        A string of HTML representing the animal, including its name, diet, location, and type."""
+
     output = '' # Start with an empty string
     output += '<li class="cards__item">\n' # Add opening <li> tag
     output += f'<div class="card__title">{animal_obj.get("name", "Unknown Animal")}</div>\n' # Add title
