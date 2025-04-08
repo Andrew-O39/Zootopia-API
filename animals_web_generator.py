@@ -38,7 +38,12 @@ def main():
         output = "<h2>No animal name entered.</h2>"
 
     else:
-        animals_data = data_fetcher.fetch_animal_data(name)
+        try:
+            animals_data = data_fetcher.fetch_animal_data(name)
+        except Exception as e:
+            print(f"Error fetching data: {e}")
+            output = "<h2>There was an error fetching animal data. Please try again later.</h2>"
+            return
 
         if not animals_data:
             output = f'<h2>The animal "{name}" does not exist. Would you like to try a different animal?</h2>'
