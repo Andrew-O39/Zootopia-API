@@ -1,10 +1,11 @@
-from api_data import fetch_animal_data
+import data_fetcher
+
 
 def serialize_animal(animal_obj):
     output = '' # Start with an empty string
     output += '<li class="cards__item">\n' # Add opening <li> tag
     output += f'<div class="card__title">{animal_obj.get("name", "Unknown Animal")}</div>\n' # Add title
-    output += '<p class="card__text">\n'
+    output += '<p class="card__text">\n'  # Add opening <p> tag
 
     # Diet
     if animal_obj.get("characteristics") and "diet" in animal_obj["characteristics"]:
@@ -38,7 +39,7 @@ def main():
         output = "<h2>No animal name entered.</h2>"
 
     else:
-        animals_data = fetch_animal_data(name)
+        animals_data = data_fetcher.fetch_animal_data(name)
 
         if not animals_data:
             output = f'<h2>The animal "{name}" does not exist. Would you like to try a different animal?</h2>'
