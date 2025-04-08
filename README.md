@@ -9,9 +9,9 @@ The Program:
 - Fetches animal data from the API
 - Displays diet, location, and type in a styled website
 - Handles invalid input or animals not found gracefully
-- API key securely managed using `.env`
-- Modular code with `fetch_animal_data()` and `serialize_animal()` separation
-- Basic error handling for file access and network issues
+- Manages API key securely using `.env`
+- Uses Modular code with `fetch_animal_data()` and `serialize_animal()` separation
+- Handles basic error handling for file access and network issues
 
 ---
 

@@ -2,7 +2,7 @@ import data_fetcher
 
 def serialize_animal(animal_obj):
     """Converts an animal dictionary into an HTML <li> element for display on the website."""
-    output = [] #Initialize an empty list
+    output = [] # Initialize an empty list
     output.append('<li class="cards__item">\n')
     output.append(f'<div class="card__title">{animal_obj.get("name", "Unknown Animal")}</div>\n')
     output.append('<p class="card__text">\n')
@@ -36,10 +36,9 @@ def main():
     if not name:
         print("No animal name entered.")
         output = "<h2>No animal name entered.</h2>"
-
     else:
         try:
-            animals_data = data_fetcher.fetch_animal_data(name)
+            animals_data = data_fetcher.fetch_animal_data(name) # Call fetch_animal_data function to fetch API
         except Exception as e:
             print(f"Error fetching data: {e}")
             output = "<h2>There was an error fetching animal data. Please try again later.</h2>"
