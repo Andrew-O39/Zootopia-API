@@ -1,35 +1,27 @@
 import data_fetcher
 
-
 def serialize_animal(animal_obj):
-    """Converts an animal dictionary into an HTML <li> element for display on the website.
-    Parameters:
-        animal_obj (dict): A dictionary containing information about a single animal.
-                           Expected keys include 'name', 'characteristics', and 'locations'.
-    Returns:
-        A string of HTML representing the animal, including its name, diet, location, and type."""
-
-    output = '' # Start with an empty string
-    output += '<li class="cards__item">\n' # Add opening <li> tag
-    output += f'<div class="card__title">{animal_obj.get("name", "Unknown Animal")}</div>\n' # Add title
-    output += '<p class="card__text">\n'  # Add opening <p> tag
+    """Converts an animal dictionary into an HTML <li> element for display on the website."""
+    output = [] #Initialize an empty list
+    output.append('<li class="cards__item">\n')
+    output.append(f'<div class="card__title">{animal_obj.get("name", "Unknown Animal")}</div>\n')
+    output.append('<p class="card__text">\n')
 
     # Diet
     if animal_obj.get("characteristics") and "diet" in animal_obj["characteristics"]:
-        output += f'<strong>Diet:</strong> {animal_obj["characteristics"]["diet"]}<br/>\n'
+        output.append(f'<strong>Diet:</strong> {animal_obj["characteristics"]["diet"]}<br/>\n')
 
     # Location
     if isinstance(animal_obj.get("locations"), list) and animal_obj["locations"]:
-        output += f'<strong>Location:</strong> {animal_obj["locations"][0]}<br/>\n'
+        output.append(f'<strong>Location:</strong> {animal_obj["locations"][0]}<br/>\n')
 
     # Type
     if animal_obj.get("characteristics") and "type" in animal_obj["characteristics"]:
-        output += f'<strong>Type:</strong> {animal_obj["characteristics"]["type"]}<br/>\n'
+        output.append(f'<strong>Type:</strong> {animal_obj["characteristics"]["type"]}<br/>\n')
 
-    output += '</p>\n'  # Close <p> tag
-    output += '</li>\n' # Close <li> tag
-
-    return output # Return the complete HTML string for the animal
+    output.append('</p>\n')
+    output.append('</li>\n')
+    return ''.join(output)  # Join all elements of the list into a single string
 
 
 def main():
@@ -56,7 +48,7 @@ def main():
 
     # Replace placeholder with generated animal information
     if "__REPLACE_ANIMALS_INFO__" not in template_content:
-        print("Warning: Placeholder '__REPLACE_ANIMALS_INFO__' not found in template.")
+        print("Error: Placeholder '__REPLACE_ANIMALS_INFO__' not found in the template. Please check your template.")
         return
     updated_html = template_content.replace("__REPLACE_ANIMALS_INFO__", output)
 
